@@ -1,4 +1,5 @@
 library(shiny)
+library(ggplot2)
 
 # Define UI
 ui <- fluidPage(
@@ -16,7 +17,7 @@ ui <- fluidPage(
             sliderInput(inputId = "things",
                         label = "Number of things",
                         min = 1,
-                        maax = 50,
+                        max = 50,
                         value = 30)
         ),
 
@@ -28,3 +29,15 @@ ui <- fluidPage(
         )
     )
 )
+
+server <- function(input, output) {
+    output$distPlot <- renderPlot({
+
+        x_vals <- faithful$waiting
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        geom_histogram(mapping = aes(x=x_vals))
+    })
+}
+
+shinyApp(ui, server)
