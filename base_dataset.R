@@ -7,7 +7,6 @@ library(mosaic)
 library(rvest)
 library(methods)
 library(lubridate)
-library(RSelenium)
 
 # Load team names and abbreviations from Wikipedia
 team_abbr_url <- "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_National_Basketball_Association/National_Basketball_Association_team_abbreviations"
@@ -18,7 +17,12 @@ team_abbr_tables <- team_abbr_url %>%
 # Create franchise name to abbreviation data frame
 team_abbrs <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
     rename(abbr = 'Abbreviation/Acronym',
-           franchise = Franchise)
+           franchise = Franchise) %>%
+    mutate(url_code = franchise) %>%
+    separate(col = url_code, into = c('word1', 'word2', 'word3')) %>%
+    mutate(word1 = tolower(word1), word2 = tolower(word2), word3 = tolower(word3)) %>%
+    unite(col = url_code, word1, word2, word3, sep = '-', na.rm = TRUE) %>%
+    mutate(url = paste('https://www.espn.com/nba/team/roster/_/name/', tolower(abbr), '/', url_code, sep = ""))
 
 # Load 2022-23 NBA schedule from basketball reference
 sched_csv <- read_csv("nba_schedule_2022_23.csv")
@@ -41,42 +45,16 @@ league_sched <- sched_csv %>%
                              locale = Sys.getlocale("LC_TIME"),
                              truncated = 0))
 
+for
 # Load table of players from NBA RealGM
-player_lyst_url <- "https://basketball.realgm.com/nba/players"
+player_lyst_url <- "https://www.espn.com/nba/team/roster/_/name/"
 player_lyst_tables <- player_lyst_url %>%
     read_html() %>%
     html_nodes("table")
 
-# Load table of players from nba.com
-player_lyst_url2 <- "https://nba.com/players"
-player_lyst_tables2 <- player_lyst_url2 %>%
-    read_html() %>%
-    html_nodes("table")
-
-# Start a Selenium server
-selServ <- RSelenium::rsDriver(browser = "chrome")
-remDr <- selServ$client
-
-# Navigate to the page with the table
-remDr$navigate("https://nba.com/players")
-
-# Retrieve the HTML content after the JavaScript has executed
-html <- remDr$getPageSource()[[1]]
-
-# Close the Selenium server
-remDr$close()
-selServ$server$stop()
-
-# Parse the HTML content and extract the table
-table <- html %>% read_html() %>% html_node(".players-list") %>% html_table()
-
-# Print the number of rows in the table
-nrows <- nrow(table)
-print(nrows)
-
 # Create a data frame of players and player info
-player_lyst2 <- html_table(player_lyst_tables2[[1]], header = TRUE)
-    #rename(number = "#", player_name = "Player", pos = "Pos", height = "HT",
+player_lyst <- html_table(player_lyst_tables[[1]], header = TRUE) %>%
+    rename(number = "#", player_name = "Player", pos = "Pos", height = "HT",
            weight = "WT", age = "Age", franchise = "Current Team",
            seasons_played = "YOS", pre_draft_team = "Pre-Draft Team",
            draft_pos = "Draft Status", nationality = "Nationality") %>%
@@ -101,6 +79,6 @@ player_url()
 # https://www.basketball-reference.com/leagues/NBA_2023_games-march.html
 # https://www.basketball-reference.com/leagues/NBA_2023_games-april.html
 ## List of Players
-# https://basketball.realgm.com/nba/players
+# https://www.espn.com/nba/
 
 #ChatGPT
