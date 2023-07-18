@@ -8,6 +8,8 @@ library(rvest)
 library(methods)
 library(lubridate)
 
+###############################TEAM ABBREVIATIONS###############################
+
 # Load team names and abbreviations from Wikipedia
 team_abbr_url <- "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_National_Basketball_Association/National_Basketball_Association_team_abbreviations"
 team_abbr_tables <- team_abbr_url %>%
@@ -23,6 +25,8 @@ team_abbrs <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
     mutate(word1 = tolower(word1), word2 = tolower(word2), word3 = tolower(word3)) %>%
     unite(col = url_code, word1, word2, word3, sep = '-', na.rm = TRUE) %>%
     mutate(url = paste('https://www.espn.com/nba/team/roster/_/name/', tolower(abbr), '/', url_code, sep = ""))
+
+###############################NBA 22-23 Schedule###############################
 
 # Load 2022-23 NBA schedule from basketball reference
 sched_csv <- read_csv("nba_schedule_2022_23.csv")
@@ -45,7 +49,20 @@ league_sched <- sched_csv %>%
                              locale = Sys.getlocale("LC_TIME"),
                              truncated = 0))
 
-for
+##################################Player Frame##################################
+
+player_table <- data.frame(img = c(), name = c(), pos = c(), age = c(),
+                           hgt = c(), wgt = c(), college = c(), sal = c())
+
+# Get the roster of an individual team
+team_roster_table <- function(url, main_table) {
+    tables <- url %>%
+        read_html() %>%
+        html_nodes("table")
+        roster <- html_table(tables[[1]], header = FALSE)
+        main_table <- full_join(main_table, roster)
+}
+
 # Load table of players from NBA RealGM
 player_lyst_url <- "https://www.espn.com/nba/team/roster/_/name/"
 player_lyst_tables <- player_lyst_url %>%
