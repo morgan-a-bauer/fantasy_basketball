@@ -4,7 +4,7 @@ library(shiny)
 ui <- fluidPage(
 
     # App title
-    titlePanel("Test UI")
+    titlePanel("Test UI"),
 
     # Sidebar layout
     sidebarLayout(
@@ -19,5 +19,12 @@ ui <- fluidPage(
                         maax = 50,
                         value = 30)
         ),
+
+    # Main panel for displaying output
+    mainPanel(
+
+        # Output: Histogram
+        plotOutput(outputId = "distPlot")
+        )
     )
 )
