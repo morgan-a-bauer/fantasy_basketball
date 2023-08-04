@@ -51,23 +51,25 @@ league_sched <- sched_csv %>%
 
 ##################################Player Frame##################################
 
-player_table <- data.frame(img = c(), name = c(), pos = c(), age = c(),
-                           hgt = c(), wgt = c(), college = c(), sal = c())
+player_table <- data.frame()
 
-# Get the roster of an individual team
-team_roster_table <- function(url, main_table) {
+# All NBA and ABA players
+append_letter_table <- function(letter, table) {
+    url = sprintf("https://www.basketball-reference.com/players/%s/", letter)
+    Sys.sleep(5)
     tables <- url %>%
         read_html() %>%
         html_nodes("table")
-        roster <- html_table(tables[[1]], header = FALSE)
-        main_table <- full_join(main_table, roster)
+    new_table <- html_table(tables[[1]], header = TRUE)
+    updated_table <- bind_rows(new_table, table)
+    return(updated_table)
 }
 
-# Load table of players from NBA RealGM
-player_lyst_url <- "https://www.espn.com/nba/team/roster/_/name/"
-player_lyst_tables <- player_lyst_url %>%
-    read_html() %>%
-    html_nodes("table")
+for (letter in setdiff(letters, 'x')) {
+    player_table <- append_letter_table(letter, player_table)
+}
+
+player_table <- player_table %>% filter(To == 2023)
 
 # Create a data frame of players and player info
 player_lyst <- html_table(player_lyst_tables[[1]], header = TRUE) %>%
@@ -96,6 +98,6 @@ player_url()
 # https://www.basketball-reference.com/leagues/NBA_2023_games-march.html
 # https://www.basketball-reference.com/leagues/NBA_2023_games-april.html
 ## List of Players
-# https://www.espn.com/nba/
+# https://www.basketball-reference.com/players/
 
 #ChatGPT
