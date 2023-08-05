@@ -56,7 +56,6 @@ player_table <- data.frame()
 # All NBA and ABA players
 append_letter_table <- function(letter, table) {
     url = sprintf("https://www.basketball-reference.com/players/%s/", letter)
-    Sys.sleep(5)
     tables <- url %>%
         read_html() %>%
         html_nodes("table")
@@ -65,8 +64,12 @@ append_letter_table <- function(letter, table) {
     return(updated_table)
 }
 
-for (letter in setdiff(letters, 'x')) {
+for (letter in letters) {
+    if (letter == "x") {
+        next
+    }
     player_table <- append_letter_table(letter, player_table)
+    Sys.sleep(7)
 }
 
 player_table <- player_table %>% filter(To == 2023)
