@@ -77,7 +77,10 @@ player_table <- player_table %>% filter(To == 2023)
 modified_player_table <- player_table %>%
     rename(name = "Player", start_yr = "From", end_yr = "To", pos = "Pos",
            height = "Ht", weight = "Wt", birthdate = "Birth Date",
-           colleges = "Colleges")
+           colleges = "Colleges") %>%
+    separate(col = name, into = c("first_name", "last_name", "suffix"),
+             sep = " ")
+
 # Create a data frame of players and player info
 player_lyst <- html_table(player_lyst_tables[[1]], header = TRUE) %>%
     rename(number = "#", player_name = "Player", pos = "Pos", height = "HT",
