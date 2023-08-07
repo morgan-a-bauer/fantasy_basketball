@@ -79,7 +79,11 @@ modified_player_table <- player_table %>%
            height = "Ht", weight = "Wt", birthdate = "Birth Date",
            colleges = "Colleges") %>%
     separate(col = name, into = c("first_name", "last_name", "suffix"),
-             sep = " ")
+             sep = " ") %>%
+    mutate(first = tolower(first_name), last = tolower(last_name), suff = tolower(suffix)) %>%
+    mutate(first = gsub("[[:punct:]]", "", first), last = gsub("[[:punct:]]", "", last), suff = gsub("[[:punct:]]", "", suff)) %>%
+    unite(col = player_code, first, last, suff, sep = "-", na.rm = TRUE) %>%
+    select(-end_yr)
 
 # Create a data frame of players and player info
 player_lyst <- html_table(player_lyst_tables[[1]], header = TRUE) %>%
