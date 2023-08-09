@@ -7,6 +7,7 @@ library(mosaic)
 library(rvest)
 library(methods)
 library(lubridate)
+library(stringi)
 
 ###############################TEAM ABBREVIATIONS###############################
 
@@ -17,7 +18,7 @@ team_abbr_tables <- team_abbr_url %>%
     html_nodes("table")
 
 # Create franchise name to abbreviation data frame
-team_abbrs.df <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
+team_abbreviations <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
     rename(abbr = 'Abbreviation/Acronym', franchise = Franchise)
 
 ###############################NBA 22-23 Schedule###############################
@@ -26,7 +27,7 @@ team_abbrs.df <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
 sched_csv <- read_csv("nba_schedule_2022_23.csv")
 
 # Create league schedule data frame
-league_sched.df <- sched_csv %>%
+league_schedule_2023 <- sched_csv %>%
     select('Date', 'Start (ET)', 'Visitor/Neutral', 'Home/Neutral', 'Arena', 8) %>%
     rename(date = Date, time = 'Start (ET)', visitor = 'Visitor/Neutral',
            home = 'Home/Neutral', arena = Arena, ot = "...8") %>%
@@ -70,7 +71,7 @@ for (letter in letters) {
 player_table <- player_table %>% filter(To == 2023) # Only includes current players
 
 # Create player data frame
-player_table.df <- player_table %>%
+nba_players <- player_table %>%
     rename(name = "Player", start_yr = "From", end_yr = "To", pos = "Pos",
            height = "Ht", weight = "Wt", birthdate = "Birth Date",
            colleges = "Colleges") %>%
@@ -78,10 +79,23 @@ player_table.df <- player_table %>%
              sep = " ") %>%
     mutate(first = tolower(first_name), last = tolower(last_name), suff = tolower(suffix)) %>%
     mutate(first = gsub("[[:punct:]]", "", first), last = gsub("[[:punct:]]", "", last), suff = gsub("[[:punct:]]", "", suff)) %>%
-    unite(col = player_code, first, last, suff, sep = "-", na.rm = TRUE) %>%
-    select(-end_yr)
+    mutate(first = stri_trans_general(first, "Latin-ASCII"),
+           last = stri_trans_general(last, "Latin-ASCII"),
+           suff = stri_trans_general(suff, "Latin-ASCII")) %>%
+    select(-end_yr) %>%
+    mutate(last = substr(last, 1, 5)) %>%
+    mutate(first = substr(first, 1, 2)) %>%
+    mutate(id_num = "01") %>%
+    select(-suff) %>%
+    mutate(id_num = ifelse(row_number() %in% c(12, 16, 18, 33, 37, 43, 65, 74, 126, 142, 144, 149, 159, 172, 192, 198, 205, 216, 231, 233, 236, 268, 282, 289, 290, 299, 317, 319, 321, 322, 327, 333, 376, 380, 381, 382, 392, 398, 403, 405, 442, 445, 472, 491, 509, 512, 518, 519), '02', id_num)) %>%
+    mutate(id_num = ifelse(row_number() %in% c(27, 99, 230, 246, 297, 298, 510), '03', id_num)) %>%
+    mutate(id_num = ifelse(row_number() %in% c(38, 41, 103, 194, 293, 295), '04', id_num)) %>%
+    mutate(id_num = ifelse(row_number() %in% c(102, 291, 378), '05', id_num)) %>%
+    mutate(id_num = ifelse(row_number() %in% c(32, 35, 404), '06', id_num)) %>%
+    mutate(id_num = ifelse(row_number() %in% c(36, 39, 294), '07', id_num)) %>%
+    unite(col = id_code, last, first, id_num, sep = "")
 
-save(team_abbrs.df, league_sched.df, player_table.df, file = "fantasyBasketball2023.RData")
+save(team_abbreviations, league_schedule_2023, nba_players, file = "fantasyBasketball2023.RData")
 
 # Links
 ## Abbreviations
