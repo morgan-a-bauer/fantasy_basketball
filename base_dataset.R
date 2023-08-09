@@ -17,14 +17,8 @@ team_abbr_tables <- team_abbr_url %>%
     html_nodes("table")
 
 # Create franchise name to abbreviation data frame
-team_abbrs <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
-    rename(abbr = 'Abbreviation/Acronym',
-           franchise = Franchise) %>%
-    mutate(url_code = franchise) %>%
-    separate(col = url_code, into = c('word1', 'word2', 'word3')) %>%
-    mutate(word1 = tolower(word1), word2 = tolower(word2), word3 = tolower(word3)) %>%
-    unite(col = url_code, word1, word2, word3, sep = '-', na.rm = TRUE) %>%
-    mutate(url = paste('https://www.espn.com/nba/team/roster/_/name/', tolower(abbr), '/', url_code, sep = ""))
+team_abbrs.df <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
+    rename(abbr = 'Abbreviation/Acronym', franchise = Franchise)
 
 ###############################NBA 22-23 Schedule###############################
 
@@ -32,7 +26,7 @@ team_abbrs <- html_table(team_abbr_tables[[1]], header = TRUE) %>%
 sched_csv <- read_csv("nba_schedule_2022_23.csv")
 
 # Create league schedule data frame
-league_sched <- sched_csv %>%
+league_sched.df <- sched_csv %>%
     select('Date', 'Start (ET)', 'Visitor/Neutral', 'Home/Neutral', 'Arena', 8) %>%
     rename(date = Date, time = 'Start (ET)', visitor = 'Visitor/Neutral',
            home = 'Home/Neutral', arena = Arena, ot = "...8") %>%
@@ -64,17 +58,19 @@ append_letter_table <- function(letter, table) {
     return(updated_table)
 }
 
+# Append players whose last names begin with each letter of the alphabet (except x)
 for (letter in letters) {
     if (letter == "x") {
         next
     }
     player_table <- append_letter_table(letter, player_table)
-    Sys.sleep(7)
+    Sys.sleep(7) # To prevent HTTPS error 429
 }
 
-player_table <- player_table %>% filter(To == 2023)
+player_table <- player_table %>% filter(To == 2023) # Only includes current players
 
-modified_player_table <- player_table %>%
+# Create player data frame
+player_table.df <- player_table %>%
     rename(name = "Player", start_yr = "From", end_yr = "To", pos = "Pos",
            height = "Ht", weight = "Wt", birthdate = "Birth Date",
            colleges = "Colleges") %>%
@@ -85,21 +81,8 @@ modified_player_table <- player_table %>%
     unite(col = player_code, first, last, suff, sep = "-", na.rm = TRUE) %>%
     select(-end_yr)
 
-# Create a data frame of players and player info
-player_lyst <- html_table(player_lyst_tables[[1]], header = TRUE) %>%
-    rename(number = "#", player_name = "Player", pos = "Pos", height = "HT",
-           weight = "WT", age = "Age", franchise = "Current Team",
-           seasons_played = "YOS", pre_draft_team = "Pre-Draft Team",
-           draft_pos = "Draft Status", nationality = "Nationality") %>%
-    separate(col = player_name, into = c("first_name", "last_name", "suffix"),
-             sep = " ") %>%
-    mutate(first = tolower(first_name), last = tolower(last_name), suff = tolower(suffix)) %>%
-    mutate(first = gsub("[[:punct:]]", "", first), last = gsub("[[:punct:]]", "", last), suff = gsub("[[:punct:]]", "", suff)) %>%
-    unite(col = name, first_name, last_name, suffix, sep = " ", na.rm = TRUE) %>%
-    unite(col = player_code, first, last, suff, sep = "-", na.rm = TRUE)
+save(team_abbrs.df, league_sched.df, player_table.df, file = "fantasyBasketball2023.RData")
 
-
-player_url()
 # Links
 ## Abbreviations
 # https://en.wikipedia.org/wiki/Wikipedia:WikiProject_National_Basketball_Association/National_Basketball_Association_team_abbreviations
@@ -113,5 +96,4 @@ player_url()
 # https://www.basketball-reference.com/leagues/NBA_2023_games-april.html
 ## List of Players
 # https://www.basketball-reference.com/players/
-
 #ChatGPT

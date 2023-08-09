@@ -1,0 +1,3 @@
+load("/Users/morganbauer/Documents/GitHub/fantasy_basketball/fantasyBasketball2023.RData")
+View(team_abbrs)
+View(team_abbrs.df)
