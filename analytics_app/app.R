@@ -48,12 +48,15 @@ server <- function(input, output) {
             print(new_id)
             first_letter <- new_id[1]
             game_log_url <- sprintf("https://www.basketball-reference.com/players/%s/%s/gamelog/2023", first_letter, new_id)
-            tables <- game_log_url %>%
-                read_html() %>%
-                html_nodes("table")
-            new_table <- html_table(tables[[1]], header = TRUE)
-            comparison_values$df <- bind_rows(comparison_values$df, new_table)
-            print(new_table)
+            isolate({
+
+                tables <- game_log_url %>%
+                    read_html() %>%
+                    html_nodes("table")
+                new_table <- html_table(tables[[1]], header = TRUE)
+                comparison_values$df <- bind_rows(comparison_values$df, new_table)
+                print(new_table)
+            })
             }
         }
     })
