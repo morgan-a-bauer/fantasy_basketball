@@ -94,7 +94,8 @@ nba_players <- player_table %>%
     mutate(id_num = ifelse(row_number() %in% c(32, 35, 404), '06', id_num)) %>%
     mutate(id_num = ifelse(row_number() %in% c(36, 39, 294), '07', id_num)) %>%
     unite(col = id_code, last, first, id_num, sep = "") %>%
-    unite(col = name, first_name, last_name, suffix, sep = " ", na.rm = TRUE)
+    unite(col = name, first_name, last_name, suffix, sep = " ", na.rm = TRUE) %>%
+    arrange(name)
 
 save(team_abbreviations, league_schedule_2023, nba_players, file = "fantasyBasketball2023.RData")
 

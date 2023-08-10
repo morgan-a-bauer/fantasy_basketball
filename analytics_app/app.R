@@ -1,5 +1,6 @@
 library(shiny)
 library(tidyverse)
+library(rvest)
 load("fantasyBasketball2023.RData")
 
 ui <- navbarPage("Bauer Analytics",
@@ -9,7 +10,7 @@ ui <- navbarPage("Bauer Analytics",
                         sidebarPanel(
                             fluidRow(
                                 selectizeInput(
-                                    inputId = "searchme",
+                                    inputId = "player_search",
                                     label = "Select Players to Compare",
                                     multiple = TRUE,
                                     choices = nba_players$name,
@@ -24,7 +25,7 @@ ui <- navbarPage("Bauer Analytics",
                             )
                         ),
                         mainPanel(
-
+                            plotOutput(outputId = "comparison_plot")
                         )
                     )
                 ),
@@ -32,8 +33,29 @@ ui <- navbarPage("Bauer Analytics",
 )
 
 server <- function(input, output) {
+    comparison_values <- reactiveValues()
+    comparison_values$df <- data.frame()
     observe({
-        print(input$searchme)
+        new_player <- input$player_search
+
+        if (!is.null(new_player) && new_player != "") {
+
+            print(new_player)
+            new_id <- subset(nba_players, name == new_player, select = id_code)
+
+            if (length(new_id) > 0) {
+
+            print(new_id)
+            first_letter <- new_id[1]
+            game_log_url <- sprintf("https://www.basketball-reference.com/players/%s/%s/gamelog/2023", first_letter, new_id)
+            tables <- game_log_url %>%
+                read_html() %>%
+                html_nodes("table")
+            new_table <- html_table(tables[[1]], header = TRUE)
+            comparison_values$df <- bind_rows(comparison_values$df, new_table)
+            print(new_table)
+            }
+        }
     })
 }
 
