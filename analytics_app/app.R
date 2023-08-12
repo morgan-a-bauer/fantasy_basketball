@@ -76,7 +76,7 @@ server <- function(input, output) {
                                    STL = as.integer(STL), BLK = as.integer(BLK),
                                    TOV = as.integer(TOV), PTS = as.integer(PTS)) %>%
                             rename(Game = 'Rk') %>%
-                            mutate(FAN_PTS = PTS + (3 * BLK) + (3 * STL) - TOV + (1.2 * AST) + (1.5 * TRB)) %>%
+                            mutate(FAN_PTS = PTS + (3 * BLK) + (3 * STL) - TOV + (1.5 * AST) + (1.2 * TRB)) %>%
                             select(Player, Game, FAN_PTS)
 
                         comparison_values$df <- bind_rows(comparison_values$df, new_table)
