@@ -31,17 +31,21 @@ ui <- navbarPage("The Common Denominator",
                          )
                      )
                  ),
-                tabPanel("Compare Matchups", icon = icon("basketball")),
+                tabPanel("Player Stats", icon = icon("basketball")),
                 tabPanel("Draft Tools", icon = icon("clipboard")),
-                tabPanel("Previous Results", icon = icon("medal")),
+                tabPanel("Previous Results", icon = icon("medal"),
+                    dataTableOutput("results_table")
+                ),
                 fluid = TRUE
 )
 
 server <- function(input, output) {
-    comparison_values <- reactiveValues()
-    comparison_values$df <- data.frame()
 
+    # Compare Players Page
     observe({
+        comparison_values <- reactiveValues()
+        comparison_values$df <- data.frame()
+
         selected_players <- input$player_search
 
         if (!is.null(selected_players) && length(selected_players) > 0) {
@@ -95,6 +99,9 @@ server <- function(input, output) {
             }
         }
     })
+
+    # Previous Results Page
+    output$results_table <- renderDataTable(read_csv("COCA_results.csv"))
 }
 
 shinyApp(ui, server)
