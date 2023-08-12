@@ -4,34 +4,37 @@ library(rvest)
 library(RColorBrewer)
 load("fantasyBasketball2023.RData")
 
-ui <- navbarPage("Bauer Analytics",
-               tabPanel("Home"),
-               tabPanel("Player Comparison",
-                    sidebarLayout(
-                        sidebarPanel(
-                            fluidRow(
-                                selectizeInput(
-                                    inputId = "player_search",
-                                    label = "Select Players to Compare",
-                                    multiple = TRUE,
-                                    choices = nba_players$name,
-                                    options = list(
-                                        create = FALSE,
-                                        placeholder = "Enter Player Name",
-                                        maxItems = '10',
-                                        onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
-                                        onType = I('function (str) {if (str === \"\") {this.close();}}')
-                                    )
-                                )
-                            )
-                        ),
-                        mainPanel(
-                            plotOutput("comparison_plot"),
-                            dataTableOutput("comparison_table")
-                        )
-                    )
-                ),
-               fluid = TRUE
+ui <- navbarPage("The Common Denominator",
+                tabPanel("Home", icon = icon("house")),
+                tabPanel("Compare Players", icon = icon("user-group"),
+                     sidebarLayout(
+                         sidebarPanel(
+                             fluidRow(
+                                 selectizeInput(
+                                     inputId = "player_search",
+                                     label = "Select Players to Compare",
+                                     multiple = TRUE,
+                                     choices = nba_players$name,
+                                     options = list(
+                                         create = FALSE,
+                                         placeholder = "Enter Player Name",
+                                         maxItems = '10',
+                                         onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
+                                         onType = I('function (str) {if (str === \"\") {this.close();}}')
+                                     )
+                                 )
+                             )
+                         ),
+                         mainPanel(
+                             plotOutput("comparison_plot"),
+                             dataTableOutput("comparison_table")
+                         )
+                     )
+                 ),
+                tabPanel("Compare Matchups", icon = icon("basketball")),
+                tabPanel("Draft Tools", icon = icon("clipboard")),
+                tabPanel("Previous Results", icon = icon("medal")),
+                fluid = TRUE
 )
 
 server <- function(input, output) {
