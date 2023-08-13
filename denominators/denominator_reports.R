@@ -69,7 +69,13 @@ master_table <- per_game_table %>%
            WSp48 = as.double(WSp48), OBPM = as.double(OBPM), DBPM = as.double(DBPM),
            BPM = as.double(BPM), VORP = as.double(VORP)) %>%
     mutate(FAN_PTS_PG = PPG + (1.5 * APG) + (1.2 * TRBPG) + (3 * SPG) + (3 * BPG) - TPG) %>%
-    mutate(FAN_PTS = PTS + (1.5 * AST)  + (1.2 * TRB) + (3 * STL) + (3 * BLK) - TOV)
+    mutate(FAN_PTS = PTS + (1.5 * AST)  + (1.2 * TRB) + (3 * STL) + (3 * BLK) - TOV) %>%
+    relocate(FAN_PTS_PG, .after = GS) %>%
+    relocate(FAN_PTS, .after = FAN_PTS_PG)
 
 draft_table <- master_table %>%
-    arrange(desc(G), desc(MPPG), desc(USGr), )
+    arrange(desc(G), desc(MPPG), desc(USGr), desc(FAN_PTS_PG)) %>%
+    filter(FAN_PTS_PG > 30)
+
+alternate_table <- master_table %>%
+    arrange(desc(FAN_PTS))
