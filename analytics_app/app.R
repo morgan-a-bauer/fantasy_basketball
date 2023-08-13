@@ -88,7 +88,7 @@ server <- function(input, output) {
                     first_letter <- new_id[1]
                     game_log_url <- sprintf("https://www.basketball-reference.com/players/%s/%s/gamelog/2023", first_letter, new_id)
 
-                    # We-scraping the game logs
+                    # Web-scraping the game logs
                     isolate({
 
                         tables <- game_log_url %>%
@@ -135,25 +135,26 @@ server <- function(input, output) {
 
     # Player Stats Page
     observe({
+        # Initialize a new reactiveValues object
         player_stats_values <- reactiveValues()
         player_stats_values$game_log <- data.frame()
 
+        # Get input from the search bar
         selected_player <- input$player_stat_search
 
         if (!is.null(selected_player) && length(selected_player) > 0) {
 
             player_stats_values$game_log <- data.frame()
 
-            print(selected_player)
             new_id <- subset(nba_players, name == selected_player, select = id_code)
 
             if (length(new_id) > 0) {
 
-                print(new_id)
                 first_letter <- new_id[1]
                 game_log_url <- sprintf("https://www.basketball-reference.com/players/%s/%s/gamelog/2023", first_letter, new_id)
                 isolate({
 
+                    # Tidy game log for display
                     tables <- game_log_url %>%
                         read_html() %>%
                         html_nodes("table")
@@ -168,6 +169,7 @@ server <- function(input, output) {
                         mutate(FAN_PTS = PTS + (3 * BLK) + (3 * STL) - TOV + (1.5 * AST) + (1.2 * TRB)) %>%
                         select(Game, FAN_PTS, PTS, AST, TRB, STL, BLK, TOV)
 
+                    # Game Log Data Table Output
                     player_stats_values$game_log <- new_table
                     output$player_stats_table <- renderDataTable(player_stats_values$game_log)
                 })
