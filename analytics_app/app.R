@@ -5,38 +5,62 @@ library(RColorBrewer)
 load("fantasyBasketball2023.RData")
 
 ui <- navbarPage("The Common Denominator",
-                tabPanel("Home", icon = icon("house")),
-                tabPanel("Compare Players", icon = icon("user-group"),
-                     sidebarLayout(
-                         sidebarPanel(
-                             fluidRow(
-                                 selectizeInput(
-                                     inputId = "player_search",
-                                     label = "Select Players to Compare",
-                                     multiple = TRUE,
-                                     choices = nba_players$name,
-                                     options = list(
-                                         create = FALSE,
-                                         placeholder = "Enter Player Name",
-                                         maxItems = '10',
-                                         onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
-                                         onType = I('function (str) {if (str === \"\") {this.close();}}')
-                                     )
-                                 )
+    tabPanel("Home", icon = icon("house")),
+    navbarMenu("Manager Tools", icon = icon("clipboard"),
+        tabPanel("Compare Players", icon = icon("user-group"),
+             sidebarLayout(
+                 sidebarPanel(
+                     fluidRow(
+                         selectizeInput(
+                             inputId = "player_comparison_search",
+                             label = "Select Players to Compare",
+                             multiple = TRUE,
+                             choices = nba_players$name,
+                             options = list(
+                                 create = FALSE,
+                                 placeholder = "Enter Player Name",
+                                 maxItems = '10',
+                                 onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
+                                 onType = I('function (str) {if (str === \"\") {this.close();}}')
                              )
-                         ),
-                         mainPanel(
-                             plotOutput("comparison_plot"),
-                             dataTableOutput("comparison_table")
                          )
                      )
                  ),
-                tabPanel("Player Stats", icon = icon("basketball")),
-                tabPanel("Draft Tools", icon = icon("clipboard")),
-                tabPanel("Previous Results", icon = icon("medal"),
-                    dataTableOutput("results_table")
+                 mainPanel(
+                     plotOutput("comparison_plot"),
+                     dataTableOutput("comparison_table")
+                 )
+             )
+         ),
+        tabPanel("Player Stats", icon = icon("basketball"),
+            sidebarLayout(
+                sidebarPanel(
+                    fluidRow(
+                        selectizeInput(
+                            inputId = "player_stat_search",
+                            label = "Select Player to View",
+                            multiple = FALSE,
+                            choices = nba_players$name,
+                            options = list(
+                                create = FALSE,
+                                placeholder = "Enter Player Name",
+                                maxItems = '10',
+                                onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
+                                onType = I('function (str) {if (str === \"\") {this.close();}}')
+                            )
+                        )
+                    )
                 ),
-                fluid = TRUE
+                mainPanel(
+                    plotOutput("comparison_plot")
+                )
+            )
+        ),
+    tabPanel("Previous Results", icon = icon("medal"),
+        dataTableOutput("results_table")
+    )
+    ),
+    fluid = TRUE
 )
 
 server <- function(input, output) {
@@ -46,7 +70,7 @@ server <- function(input, output) {
         comparison_values <- reactiveValues()
         comparison_values$df <- data.frame()
 
-        selected_players <- input$player_search
+        selected_players <- input$player_comparison_search
 
         if (!is.null(selected_players) && length(selected_players) > 0) {
 
