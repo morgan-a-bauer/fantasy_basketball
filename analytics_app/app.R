@@ -52,7 +52,7 @@ ui <- navbarPage("The Common Denominator",
                     )
                 ),
                 mainPanel(
-
+                    dataTableOutput("player_stats_table")
                 )
             )
         ),
@@ -136,16 +136,16 @@ server <- function(input, output) {
     # Player Stats Page
     observe({
         player_stats_values <- reactiveValues()
-        player_stats_values$df <- data.frame()
+        player_stats_values$game_log <- data.frame()
 
         selected_player <- input$player_stat_search
 
-        if (!is.null(selected_players) && length(selected_players) > 0) {
+        if (!is.null(selected_player) && length(selected_player) > 0) {
 
-            player_stats_values$df <- data.frame()
+            player_stats_values$game_log <- data.frame()
 
-            print(new_player)
-            new_id <- subset(nba_players, name == new_player, select = id_code)
+            print(selected_player)
+            new_id <- subset(nba_players, name == selected_player, select = id_code)
 
             if (length(new_id) > 0) {
 
@@ -159,31 +159,17 @@ server <- function(input, output) {
                         html_nodes("table")
                     new_table <- html_table(tables[[length(tables)]], header = TRUE) %>%
                         select(Rk, TRB, AST, STL, BLK, TOV, PTS) %>%
-                        mutate(Player = new_player) %>%
                         filter(Rk != "Rk") %>%
-                        select(Rk, TRB, AST, STL, BLK, TOV, PTS, Player) %>%
+                        select(Rk, TRB, AST, STL, BLK, TOV, PTS) %>%
                         mutate(TRB = as.integer(TRB), AST = as.integer(AST),
                                STL = as.integer(STL), BLK = as.integer(BLK),
                                TOV = as.integer(TOV), PTS = as.integer(PTS)) %>%
                         rename(Game = 'Rk') %>%
                         mutate(FAN_PTS = PTS + (3 * BLK) + (3 * STL) - TOV + (1.5 * AST) + (1.2 * TRB)) %>%
-                        select(Player, Game, FAN_PTS)
+                        select(Game, FAN_PTS, PTS, AST, TRB, STL, BLK, TOV)
 
-                    comparison_values$df <- bind_rows(comparison_values$df, new_table)
-                    comparison_plot_table <- comparison_values$df %>% replace(is.na(.), 0) %>%
-                        mutate(Game = as.integer(Game))
-                    wide_comparison_table <- comparison_values$df %>%
-                        pivot_wider(names_from = "Game", values_from = "FAN_PTS")
-
-                    output$comparison_plot <- renderPlot(
-                        ggplot(data = comparison_plot_table) +
-                            geom_line(mapping = aes(x = Game, y = FAN_PTS, color = Player)) +
-                            scale_fill_brewer(palette = "Spectral") +
-                            labs(title = "Fantasy Points for each Game") +
-                            ylab("Fantasy Points") +
-                            xlab("Game Number")
-                    )
-                    output$comparison_table <- renderDataTable(wide_comparison_table)
+                    player_stats_values$game_log <- new_table
+                    output$player_stats_table <- renderDataTable(player_stats_values$game_log)
                 })
             }
         }
