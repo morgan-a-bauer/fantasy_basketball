@@ -4,38 +4,58 @@ library(rvest)
 library(RColorBrewer)
 load("fantasyBasketball2023.RData")
 
-ui <- navbarPage("The Common Denominator",
-        tabPanel("Home", icon = icon("house")),
-        navbarMenu("Manager Tools", icon = icon("clipboard"),
-            tabPanel("Compare Players", icon = icon("user-group"),
-                 sidebarLayout(
-                     sidebarPanel(
-                         fluidRow(
-                             selectizeInput(
-                                 inputId = "player_comparison_search",
-                                 label = "Select Players to Compare",
-                                 multiple = TRUE,
-                                 choices = nba_players$name,
-                                 options = list(
-                                     create = FALSE,
-                                     placeholder = "Enter Player Name",
-                                     maxItems = '10',
-                                     onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
-                                     onType = I('function (str) {if (str === \"\") {this.close();}}')
-                                 )
-                             )
-                         )
-                     ),
-                     mainPanel(
-                         plotOutput("comparison_plot"),
-                         dataTableOutput("comparison_table")
-                     )
-                 )
-             ),
-            tabPanel("Player Stats", icon = icon("basketball"),
-                sidebarLayout(
-                    sidebarPanel(
-                        fluidRow(
+library(shiny)
+library(tidyverse)
+library(rvest)
+library(RColorBrewer)
+library(shinydashboard)  # Load the shinydashboard library
+load("fantasyBasketball2023.RData")
+
+ui <- dashboardPage(
+    dashboardHeader(title = "The Common Denominator"),  # Set the header
+
+    dashboardSidebar(
+        # Sidebar content goes here
+        sidebarMenu(
+            menuItem("Home", tabName = "home", icon = icon("house")),
+            menuItem("Manager Tools", tabName = "manager", icon = icon("clipboard"),
+                     menuSubItem("Compare Players", tabName = "compare", icon = icon("user-group")),
+                     menuSubItem("Player Stats", tabName = "player_stats", icon = icon("basketball")),
+                     menuSubItem("Previous Results", tabName = "results", icon = icon("medal"))
+            )
+        )
+    ),
+
+    dashboardBody(
+        # Body content goes here
+        tabItems(
+            tabItem(tabName = "home", "Home Content"),
+            tabItem(tabName = "compare",
+                    sidebarLayout(
+                        sidebarPanel(
+                            selectizeInput(
+                                inputId = "player_comparison_search",
+                                label = "Select Players to Compare",
+                                multiple = TRUE,
+                                choices = nba_players$name,
+                                options = list(
+                                    create = FALSE,
+                                    placeholder = "Enter Player Name",
+                                    maxItems = '10',
+                                    onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
+                                    onType = I('function (str) {if (str === \"\") {this.close();}}')
+                                )
+                            )
+                        ),
+                        mainPanel(
+                            plotOutput("comparison_plot"),
+                            dataTableOutput("comparison_table")
+                        )
+                    )
+            ),
+            tabItem(tabName = "player_stats",
+                    sidebarLayout(
+                        sidebarPanel(
                             selectizeInput(
                                 inputId = "player_stat_search",
                                 label = "Select Player to View",
@@ -49,18 +69,17 @@ ui <- navbarPage("The Common Denominator",
                                     onType = I('function (str) {if (str === \"\") {this.close();}}')
                                 )
                             )
+                        ),
+                        mainPanel(
+                            dataTableOutput("player_stats_table")
                         )
-                    ),
-                    mainPanel(
-                        dataTableOutput("player_stats_table")
                     )
-                )
             ),
-    tabPanel("Previous Results", icon = icon("medal"),
-        dataTableOutput("results_table")
+            tabItem(tabName = "results",
+                    dataTableOutput("results_table")
+            )
+        )
     )
-        ),
-        fluid = TRUE
 )
 
 server <- function(input, output) {
