@@ -5,75 +5,78 @@ library(RColorBrewer)
 library(shinydashboard)
 load("fantasyBasketball2023.RData")
 
-ui <- dashboardPage(skin = "purple",
-    dashboardHeader(title = "The Common Denominator", titleWidth = 400), # Set the header
-
-    dashboardSidebar(
-        # Sidebar content goes here
-        sidebarMenu(
-            menuItem("Home", tabName = "home", icon = icon("house")),
-            menuItem("Manager Tools", tabName = "manager", icon = icon("clipboard"),
-                     menuSubItem("Compare Players", tabName = "compare", icon = icon("user-group")),
-                     menuSubItem("Player Stats", tabName = "player_stats", icon = icon("basketball")),
-                     menuSubItem("Previous Results", tabName = "results", icon = icon("medal"))
-            )
-        )
-    ),
-
-    dashboardBody(
-        # Body content goes here
-        tabItems(
-            tabItem(tabName = "home", "Home Content"),
-            tabItem(tabName = "compare",
-                    sidebarLayout(
-                        sidebarPanel(
-                            selectizeInput(
-                                inputId = "player_comparison_search",
-                                label = "Select Players to Compare",
-                                multiple = TRUE,
-                                choices = nba_players$name,
-                                options = list(
-                                    create = FALSE,
-                                    placeholder = "Enter Player Name",
-                                    maxItems = '10',
-                                    onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
-                                    onType = I('function (str) {if (str === \"\") {this.close();}}')
-                                )
-                            )
-                        ),
-                        mainPanel(
-                            plotOutput("comparison_plot"),
-                            dataTableOutput("comparison_table")
-                        )
-                    )
-            ),
-            tabItem(tabName = "player_stats",
-                    sidebarLayout(
-                        sidebarPanel(
-                            selectizeInput(
-                                inputId = "player_stat_search",
-                                label = "Select Player to View",
-                                multiple = FALSE,
-                                choices = nba_players$name,
-                                options = list(
-                                    create = FALSE,
-                                    placeholder = "Enter Player Name",
-                                    maxItems = '10',
-                                    onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
-                                    onType = I('function (str) {if (str === \"\") {this.close();}}')
-                                )
-                            )
-                        ),
-                        mainPanel(
-                            dataTableOutput("player_stats_table")
-                        )
-                    )
-            ),
-            tabItem(tabName = "results",
-                    dataTableOutput("results_table")
-            )
+sidebar <- dashboardSidebar(
+    # Sidebar content goes here
+    sidebarMenu(
+        menuItem("Home", tabName = "home", icon = icon("house")),
+        menuItem("Manager Tools", tabName = "manager", icon = icon("clipboard"),
+                 menuSubItem("Compare Players", tabName = "compare", icon = icon("user-group")),
+                 menuSubItem("Player Stats", tabName = "player_stats", icon = icon("basketball")),
+                 menuSubItem("Previous Results", tabName = "results", icon = icon("medal"))
         )
     )
+)
+
+body <- dashboardBody(
+    # Body content goes here
+    tabItems(
+        tabItem(tabName = "home", "Home Content"),
+        tabItem(tabName = "compare",
+                sidebarLayout(
+                    sidebarPanel(
+                        selectizeInput(
+                            inputId = "player_comparison_search",
+                            label = "Select Players to Compare",
+                            multiple = TRUE,
+                            choices = nba_players$name,
+                            options = list(
+                                create = FALSE,
+                                placeholder = "Enter Player Name",
+                                maxItems = '10',
+                                onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
+                                onType = I('function (str) {if (str === \"\") {this.close();}}')
+                            )
+                        )
+                    ),
+                    mainPanel(
+                        plotOutput("comparison_plot"),
+                        dataTableOutput("comparison_table")
+                    )
+                )
+        ),
+        tabItem(tabName = "player_stats",
+                sidebarLayout(
+                    sidebarPanel(
+                        selectizeInput(
+                            inputId = "player_stat_search",
+                            label = "Select Player to View",
+                            multiple = FALSE,
+                            choices = nba_players$name,
+                            options = list(
+                                create = FALSE,
+                                placeholder = "Enter Player Name",
+                                maxItems = '10',
+                                onDropdownOpen = I("function (str) {if (!this.lastQuery.length) {this.close(); this.settings.openOnFocus = false;}}"),
+                                onType = I('function (str) {if (str === \"\") {this.close();}}')
+                            )
+                        ),
+                        imageOutput("player_photo")
+                    ),
+                    mainPanel(
+                        dataTableOutput("player_stats_table")
+                    )
+                )
+        ),
+        tabItem(tabName = "results",
+                dataTableOutput("results_table")
+        )
+    )
+)
+
+ui <- dashboardPage(skin = "purple",
+    dashboardHeader(title = "The Common Denominator", titleWidth = 400), # Set the header
+    sidebar,
+    body
 )
 
 server <- function(input, output) {
@@ -185,6 +188,22 @@ server <- function(input, output) {
                     # Game Log Data Table Output
                     player_stats_values$game_log <- new_table
                     output$player_stats_table <- renderDataTable(player_stats_values$game_log)
+
+                    # Player Headshot Output
+                    photo_url <- reactive({
+                        sprintf('https://www.basketball-reference.com/req/202106291/images/headshots/%s.jpg', new_id)
+                    })
+                    print("test")
+                    print(photo_url())
+                    # Use renderImage to display the player photo
+                    output$player_photo <- renderImage({
+                        list(
+                            src = photo_url(),
+                            alt = "No Image Found",
+                            width = "auto",
+                            height = "auto"
+                        )
+                    }, deleteFile = FALSE)
                 })
             }
         }
