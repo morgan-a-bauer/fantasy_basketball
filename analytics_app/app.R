@@ -2,17 +2,11 @@ library(shiny)
 library(tidyverse)
 library(rvest)
 library(RColorBrewer)
+library(shinydashboard)
 load("fantasyBasketball2023.RData")
 
-library(shiny)
-library(tidyverse)
-library(rvest)
-library(RColorBrewer)
-library(shinydashboard)  # Load the shinydashboard library
-load("fantasyBasketball2023.RData")
-
-ui <- dashboardPage(
-    dashboardHeader(title = "The Common Denominator"),  # Set the header
+ui <- dashboardPage(skin = "purple",
+    dashboardHeader(title = "The Common Denominator", titleWidth = 400), # Set the header
 
     dashboardSidebar(
         # Sidebar content goes here
