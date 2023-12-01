@@ -101,7 +101,9 @@ get_game_log <- function(player_code, season) {
                Age = as.integer(Age)) %>%
         mutate(Secs = Secs / 60) %>%
         mutate(MP = Mins + Secs) %>%
-        select(-c(Mins, Secs))
+        select(-c(Mins, Secs)) %>%
+        mutate(FAN_PTS = PTS + (3 * BLK) + (3 * STL) - TOV + (1.5 * AST) + (1.2 * TRB)) %>%
+        relocate(FAN_PTS, .before = Home)
     return(new_table)
 }
 
@@ -123,6 +125,8 @@ save_game_log <- function(player_code, season) {
         write.csv(new_log, file_path, na = "0", row.names = FALSE)
     }
 }
+
+save_game_log("foxde01", 2023)
 
 save_all_logs <- function() {
     for (i in 1:nrow())
