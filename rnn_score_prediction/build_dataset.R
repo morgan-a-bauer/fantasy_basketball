@@ -105,6 +105,11 @@ get_game_log <- function(player_code, season) {
     return(new_table)
 }
 
-save_game_logs <- function() {
+save_game_logs <- function(player_code, season) {
+    new_log = get_game_log(player_code, season)
+    filename = sprintf("%s_%s.csv", season, player_code)
+    path = getwd()
+    if (dir.exists(id_code)):
+
 
 }
