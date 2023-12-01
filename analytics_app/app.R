@@ -10,17 +10,26 @@ sidebar <- dashboardSidebar(
     sidebarMenu(
         menuItem("Home", tabName = "home", icon = icon("house")),
         menuItem("Manager Tools", tabName = "manager", icon = icon("clipboard"),
-                 menuSubItem("Compare Players", tabName = "compare", icon = icon("user-group")),
-                 menuSubItem("Player Stats", tabName = "player_stats", icon = icon("basketball")),
-                 menuSubItem("Previous Results", tabName = "results", icon = icon("medal"))
-        )
+            menuSubItem("Compare Players", tabName = "compare", icon = icon("user-group")),
+            menuSubItem("Player Stats", tabName = "player_stats", icon = icon("basketball"))
+        ),
+        menuItem("Previous Results", tabName = "results", icon = icon("medal"))
     )
 )
 
 body <- dashboardBody(
     # Body content goes here
     tabItems(
-        tabItem(tabName = "home", "Home Content"),
+        tabItem(tabName = "home",
+                mainPanel(
+                    tabBox(title = "Top Performers",
+                           id = "toptabs",
+                           width ="80%",
+                           side = "right",
+                           tabPanel(title = "FAN PTS last game"),
+                           tabPanel(title = "FAN PTS per game"),
+                           tabPanel(title = "Consistency"))
+                )),
         tabItem(tabName = "compare",
                 sidebarLayout(
                     sidebarPanel(
@@ -60,7 +69,8 @@ body <- dashboardBody(
                                 onType = I('function (str) {if (str === \"\") {this.close();}}')
                             )
                         ),
-                        imageOutput("player_photo")
+                        imageOutput("player_photo"),
+                        textOutput("consistency_txt")
                     ),
                     mainPanel(
                         dataTableOutput("player_stats_table")
@@ -193,17 +203,20 @@ server <- function(input, output) {
                     photo_url <- reactive({
                         sprintf('https://www.basketball-reference.com/req/202106291/images/headshots/%s.jpg', new_id)
                     })
-                    print("test")
                     print(photo_url())
                     # Use renderImage to display the player photo
                     output$player_photo <- renderImage({
                         list(
                             src = photo_url(),
-                            alt = "No Image Found",
-                            width = "auto",
-                            height = "auto"
+                            alt = "No Image Found"
                         )
                     }, deleteFile = FALSE)
+
+                    # Consistency Output
+                    player_stats_values$consistency <- new_table %>%
+                        summarize(std_dev = sd(FAN_PTS))$std_dev[1]
+                    output$consistency_txt <- renderText({paste("Consistency Score: ",
+                                                                str(player_stats_values$consistency))})
                 })
             }
         }

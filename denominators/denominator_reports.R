@@ -77,5 +77,13 @@ draft_table <- master_table %>%
     arrange(desc(G), desc(MPPG), desc(USGr), desc(FAN_PTS_PG)) %>%
     filter(FAN_PTS_PG > 30)
 
-alternate_table <- master_table %>%
-    arrange(desc(FAN_PTS))
+draft_table_fppg <- master_table %>%
+    arrange(desc(FAN_PTS_PG))
+
+draft_table_gp_lowest <- master_table %>%
+    arrange(G)
+
+draft_table_2 <- master_table %>%
+    arrange(desc(G), desc(MPPG), desc(USGr), desc(FAN_PTS_PG)) %>%
+    filter(G > 65)
+

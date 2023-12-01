@@ -68,7 +68,7 @@ for (letter in letters) {
     Sys.sleep(7) # To prevent HTTPS error 429
 }
 
-player_table <- player_table %>% filter(To == 2023) # Only includes current players
+player_table <- player_table %>% filter(To == 2024) # Only includes current players
 
 # Create player data frame
 nba_players <- player_table %>%
