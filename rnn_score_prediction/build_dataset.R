@@ -105,11 +105,25 @@ get_game_log <- function(player_code, season) {
     return(new_table)
 }
 
-save_game_logs <- function(player_code, season) {
+save_game_log <- function(player_code, season) {
     new_log = get_game_log(player_code, season)
     filename = sprintf("%s_%s.csv", season, player_code)
-    path = getwd()
-    if (dir.exists(id_code)):
+    main_dir = "/Users/morganbauer/Documents/GitHub/fantasy_basketball/rnn_score_prediction/training_data"
+    sub_dir = player_code
+    dir_path = file.path(main_dir, sub_dir)
+    if (file.exists(dir_path)) {
+        setwd(dir_path)
+    } else {
+        dir.create(dir_path)
+        setwd(dir_path)
+    print(getwd())
+    }
+    file_path = file.path(dir_path, filename)
+    if (!(file.exists(filename))) {
+        write.csv(new_log, file_path, na = "0", row.names = FALSE)
+    }
+}
 
-
+save_all_logs <- function() {
+    for (i in 1:nrow())
 }
