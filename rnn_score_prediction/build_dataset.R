@@ -75,16 +75,22 @@ get_game_log <- function(player_code, season) {
     tables <- url %>%
         read_html() %>%
         html_nodes("table")
-    new_table <- html_table(tables[[8]], header = TRUE, fill = TRUE, convert = TRUE)
-    colnames(new_table) <- c('Rk', 'G', 'Date', 'Age', 'Tm', 'Home', 'Opp',
+    if (length(tables) >= 8) {
+        new_table <- html_table(tables[[8]], header = TRUE, fill = TRUE, convert = TRUE)
+        if (ncol(new_table) != 30) {
+            return(NULL)
+        }
+        colnames(new_table) <- c('Rk', 'G', 'Date', 'Age', 'Tm', 'Home', 'Opp',
                              'Win', 'GS', 'MP', 'FG', 'FGA', 'FGP', 'TP', 'TPA',
                              'TPP', 'FT', 'FTA', 'FTP', 'ORB', 'DRB', 'TRB',
                              'AST', 'STL', 'BLK', 'TOV', 'PF', 'PTS', 'GmSc', 'PM')
-    new_table <- new_table %>% filter(GS != 'Inactive') %>%
+        new_table <- new_table %>% filter(GS != 'Inactive') %>%
+        filter(GS != "Did Not Play") %>%
         separate(Age, into = c("Years", "Days"), sep = "-") %>%
         mutate(Age = as.integer(Years)) %>%
         filter(Rk != "Rk") %>%
-        select(-c(Rk, G, Date, Years, Days, Tm, Win, GmSc, PM)) %>%
+        select(Age, Home, Opp, GS, MP, FG, FGA, FGP, TP, TPA, TPP, FT, FTA, FTP,
+               ORB, DRB, TRB, AST, STL, BLK, TOV, PF, PTS) %>%
         mutate(Home = ifelse(Home == "@", "0", "1")) %>%
         separate(MP, into = c("Mins", "Secs")) %>%
         mutate(Home = as.integer(Home), GS = as.integer(GS),
@@ -105,10 +111,14 @@ get_game_log <- function(player_code, season) {
         mutate(FAN_PTS = PTS + (3 * BLK) + (3 * STL) - TOV + (1.5 * AST) + (1.2 * TRB)) %>%
         relocate(FAN_PTS, .before = Home)
     return(new_table)
+    }
 }
 
 save_game_log <- function(player_code, season) {
     new_log = get_game_log(player_code, season)
+    if (is.null(new_log)) {
+        return(NULL)
+    }
     filename = sprintf("%s_%s.csv", season, player_code)
     main_dir = "/Users/morganbauer/Documents/GitHub/fantasy_basketball/rnn_score_prediction/training_data"
     sub_dir = player_code
@@ -126,8 +136,20 @@ save_game_log <- function(player_code, season) {
     }
 }
 
-save_game_log("foxde01", 2023)
+save_game_log("gallida01", 2023)
 
 save_all_logs <- function() {
-    for (i in 1:nrow())
+    for (i in 272:nrow(nba_players)) {
+        row = nba_players[i,]
+        id_code = row$id_code
+        print(id_code)
+        start_yr = row$start_yr
+        for (yr in start_yr:2024) {
+            print(yr)
+            save_game_log(id_code, yr)
+            Sys.sleep(7) # To prevent HTTPS error 429
+        }
+    }
 }
+
+save_all_logs()
