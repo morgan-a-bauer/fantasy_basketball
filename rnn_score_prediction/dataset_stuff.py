@@ -92,10 +92,15 @@ for sub_dir in os.listdir(main_dir):
                         dataset = game_dataset
                     else:
                         dataset = dataset.concatenate(game_dataset)
-                        print("Dataset size after concatenation:", len(dataset))
     except NotADirectoryError:
         pass
+    if dataset is not None and len(dataset) == 300:
+        break
 for samples, targets in dataset:
     print("samples shape:", samples.shape)
     print("targets shape:", targets.shape)
     break
+batches = 0
+for batch in dataset:
+    batches += 1
+print(f"{batches} batches")
