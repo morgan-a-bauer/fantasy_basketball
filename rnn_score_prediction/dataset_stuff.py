@@ -10,7 +10,7 @@ sampling_rate = 1
 sequence_length = 10
 delay = sampling_rate * (sequence_length)
 batch_size = 256
-
+buffer_size = 512
 teams = {'ATL': '0',
          'BOS': '1',
          'BRK': '2',
@@ -43,7 +43,6 @@ teams = {'ATL': '0',
          'WAS': '29'}
 
 main_dir = "/Users/morganbauer/Documents/GitHub/fantasy_basketball/rnn_score_prediction/training_data"
-dataset = None
 
 # Use to calculate mean and std dev
 all_fan_pts = np.zeros(24789)
@@ -54,7 +53,6 @@ for sub_dir in os.listdir(main_dir):
     path = f"{main_dir}/{sub_dir}"
     try:
         for file in os.listdir(path):
-            print(file)
             if file[:4] == '2023' or file[:4] == '2024':
                 file_path = f"{path}/{file}"
                 with open(file_path, "r") as infile:
@@ -74,33 +72,11 @@ for sub_dir in os.listdir(main_dir):
                     fan_pts = np.zeros(len(games))
                     raw_data = np.zeros((len(games), len(games[0])))
                     for i, game in enumerate(games):
-                        fan_pts[i] = game[1]
-                        raw_data[i, :] = game
                         all_fan_pts[fan_pts_index] = game[1]
                         all_raw_data[raw_data_index, :] = game
                         fan_pts_index += 1
                         raw_data_index += 1
-                    game_dataset = keras.utils.timeseries_dataset_from_array(
-                        raw_data[:-delay],
-                        targets = fan_pts[delay:],
-                        sampling_rate = sampling_rate,
-                        sequence_length = sequence_length,
-                        shuffle = True,
-                        batch_size = batch_size
-                    )
-                    if dataset is None:
-                        dataset = game_dataset
-                    else:
-                        dataset = dataset.concatenate(game_dataset)
     except NotADirectoryError:
         pass
-    if dataset is not None and len(dataset) == 300:
-        break
-for samples, targets in dataset:
-    print("samples shape:", samples.shape)
-    print("targets shape:", targets.shape)
-    break
-batches = 0
-for batch in dataset:
-    batches += 1
-print(f"{batches} batches")
+l = list(all_fan_pts)
+print(l.count(0.0))
