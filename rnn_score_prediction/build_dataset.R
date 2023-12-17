@@ -131,24 +131,20 @@ save_game_log <- function(player_code, season) {
     print(getwd())
     }
     file_path = file.path(dir_path, filename)
-    if (!(file.exists(filename))) {
-        write.csv(new_log, file_path, na = "0", row.names = FALSE)
-    }
+    #if (!(file.exists(filename))) {
+    write.csv(new_log, file_path, na = "0", row.names = FALSE)
+    #}
 }
 
 save_game_log("gallida01", 2023)
 
 save_all_logs <- function() {
-    for (i in 272:nrow(nba_players)) {
+    for (i in 1:nrow(nba_players)) {
         row = nba_players[i,]
         id_code = row$id_code
         print(id_code)
-        start_yr = row$start_yr
-        for (yr in start_yr:2024) {
-            print(yr)
-            save_game_log(id_code, yr)
-            Sys.sleep(7) # To prevent HTTPS error 429
-        }
+        save_game_log(id_code, 2024)
+        Sys.sleep(7) # To prevent HTTPS error 429
     }
 }
 
