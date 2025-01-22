@@ -7,83 +7,62 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		003BACE32D40224900DED4AE /* PBXContainerItemProxy */ = {
+		003BAD192D402A8700DED4AE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 003BACCA2D40224600DED4AE /* Project object */;
+			containerPortal = 003BAD002D402A8500DED4AE /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 003BACD12D40224700DED4AE;
-			remoteInfo = Landmarks;
+			remoteGlobalIDString = 003BAD072D402A8500DED4AE;
+			remoteInfo = fantasy_basketball_ios_app1;
 		};
-		003BACED2D40224900DED4AE /* PBXContainerItemProxy */ = {
+		003BAD232D402A8700DED4AE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 003BACCA2D40224600DED4AE /* Project object */;
+			containerPortal = 003BAD002D402A8500DED4AE /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 003BACD12D40224700DED4AE;
-			remoteInfo = Landmarks;
+			remoteGlobalIDString = 003BAD072D402A8500DED4AE;
+			remoteInfo = fantasy_basketball_ios_app1;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		003BACD22D40224700DED4AE /* Landmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Landmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		003BACE22D40224900DED4AE /* LandmarksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		003BACEC2D40224900DED4AE /* LandmarksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		003BAD082D402A8500DED4AE /* fantasy_basketball_ios_app1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fantasy_basketball_ios_app1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		003BAD182D402A8700DED4AE /* fantasy_basketball_ios_app1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fantasy_basketball_ios_app1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		003BAD222D402A8700DED4AE /* fantasy_basketball_ios_app1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fantasy_basketball_ios_app1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		003BAD4A2D4031C600DED4AE /* Exceptions for "LandmarksUITests" folder in "Landmarks" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				landmarkData.json,
-			);
-			target = 003BACD12D40224700DED4AE /* Landmarks */;
-		};
-		003BAD4B2D4031C600DED4AE /* Exceptions for "LandmarksUITests" folder in "LandmarksUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				landmarkData.json,
-			);
-			target = 003BACEB2D40224900DED4AE /* LandmarksUITests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		003BACD42D40224700DED4AE /* Landmarks */ = {
+		003BAD0A2D402A8500DED4AE /* fantasy_basketball_ios_app1 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Landmarks;
+			path = fantasy_basketball_ios_app1;
 			sourceTree = "<group>";
 		};
-		003BACE52D40224900DED4AE /* LandmarksTests */ = {
+		003BAD1B2D402A8700DED4AE /* fantasy_basketball_ios_app1Tests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LandmarksTests;
+			path = fantasy_basketball_ios_app1Tests;
 			sourceTree = "<group>";
 		};
-		003BACEF2D40224900DED4AE /* LandmarksUITests */ = {
+		003BAD252D402A8700DED4AE /* fantasy_basketball_ios_app1UITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				003BAD4A2D4031C600DED4AE /* Exceptions for "LandmarksUITests" folder in "Landmarks" target */,
-				003BAD4B2D4031C600DED4AE /* Exceptions for "LandmarksUITests" folder in "LandmarksUITests" target */,
-			);
-			path = LandmarksUITests;
+			path = fantasy_basketball_ios_app1UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		003BACCF2D40224700DED4AE /* Frameworks */ = {
+		003BAD052D402A8500DED4AE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		003BACDF2D40224900DED4AE /* Frameworks */ = {
+		003BAD152D402A8700DED4AE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		003BACE92D40224900DED4AE /* Frameworks */ = {
+		003BAD1F2D402A8700DED4AE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -93,22 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		003BACC92D40224600DED4AE = {
+		003BACFF2D402A8500DED4AE = {
 			isa = PBXGroup;
 			children = (
-				003BACD42D40224700DED4AE /* Landmarks */,
-				003BACE52D40224900DED4AE /* LandmarksTests */,
-				003BACEF2D40224900DED4AE /* LandmarksUITests */,
-				003BACD32D40224700DED4AE /* Products */,
+				003BAD0A2D402A8500DED4AE /* fantasy_basketball_ios_app1 */,
+				003BAD1B2D402A8700DED4AE /* fantasy_basketball_ios_app1Tests */,
+				003BAD252D402A8700DED4AE /* fantasy_basketball_ios_app1UITests */,
+				003BAD092D402A8500DED4AE /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		003BACD32D40224700DED4AE /* Products */ = {
+		003BAD092D402A8500DED4AE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				003BACD22D40224700DED4AE /* Landmarks.app */,
-				003BACE22D40224900DED4AE /* LandmarksTests.xctest */,
-				003BACEC2D40224900DED4AE /* LandmarksUITests.xctest */,
+				003BAD082D402A8500DED4AE /* fantasy_basketball_ios_app1.app */,
+				003BAD182D402A8700DED4AE /* fantasy_basketball_ios_app1Tests.xctest */,
+				003BAD222D402A8700DED4AE /* fantasy_basketball_ios_app1UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,134 +95,134 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		003BACD12D40224700DED4AE /* Landmarks */ = {
+		003BAD072D402A8500DED4AE /* fantasy_basketball_ios_app1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 003BACF62D40224900DED4AE /* Build configuration list for PBXNativeTarget "Landmarks" */;
+			buildConfigurationList = 003BAD2C2D402A8700DED4AE /* Build configuration list for PBXNativeTarget "fantasy_basketball_ios_app1" */;
 			buildPhases = (
-				003BACCE2D40224700DED4AE /* Sources */,
-				003BACCF2D40224700DED4AE /* Frameworks */,
-				003BACD02D40224700DED4AE /* Resources */,
+				003BAD042D402A8500DED4AE /* Sources */,
+				003BAD052D402A8500DED4AE /* Frameworks */,
+				003BAD062D402A8500DED4AE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				003BACD42D40224700DED4AE /* Landmarks */,
+				003BAD0A2D402A8500DED4AE /* fantasy_basketball_ios_app1 */,
 			);
-			name = Landmarks;
+			name = fantasy_basketball_ios_app1;
 			packageProductDependencies = (
 			);
-			productName = Landmarks;
-			productReference = 003BACD22D40224700DED4AE /* Landmarks.app */;
+			productName = fantasy_basketball_ios_app1;
+			productReference = 003BAD082D402A8500DED4AE /* fantasy_basketball_ios_app1.app */;
 			productType = "com.apple.product-type.application";
 		};
-		003BACE12D40224900DED4AE /* LandmarksTests */ = {
+		003BAD172D402A8700DED4AE /* fantasy_basketball_ios_app1Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 003BACF92D40224900DED4AE /* Build configuration list for PBXNativeTarget "LandmarksTests" */;
+			buildConfigurationList = 003BAD2F2D402A8700DED4AE /* Build configuration list for PBXNativeTarget "fantasy_basketball_ios_app1Tests" */;
 			buildPhases = (
-				003BACDE2D40224900DED4AE /* Sources */,
-				003BACDF2D40224900DED4AE /* Frameworks */,
-				003BACE02D40224900DED4AE /* Resources */,
+				003BAD142D402A8700DED4AE /* Sources */,
+				003BAD152D402A8700DED4AE /* Frameworks */,
+				003BAD162D402A8700DED4AE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				003BACE42D40224900DED4AE /* PBXTargetDependency */,
+				003BAD1A2D402A8700DED4AE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				003BACE52D40224900DED4AE /* LandmarksTests */,
+				003BAD1B2D402A8700DED4AE /* fantasy_basketball_ios_app1Tests */,
 			);
-			name = LandmarksTests;
+			name = fantasy_basketball_ios_app1Tests;
 			packageProductDependencies = (
 			);
-			productName = LandmarksTests;
-			productReference = 003BACE22D40224900DED4AE /* LandmarksTests.xctest */;
+			productName = fantasy_basketball_ios_app1Tests;
+			productReference = 003BAD182D402A8700DED4AE /* fantasy_basketball_ios_app1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		003BACEB2D40224900DED4AE /* LandmarksUITests */ = {
+		003BAD212D402A8700DED4AE /* fantasy_basketball_ios_app1UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 003BACFC2D40224900DED4AE /* Build configuration list for PBXNativeTarget "LandmarksUITests" */;
+			buildConfigurationList = 003BAD322D402A8700DED4AE /* Build configuration list for PBXNativeTarget "fantasy_basketball_ios_app1UITests" */;
 			buildPhases = (
-				003BACE82D40224900DED4AE /* Sources */,
-				003BACE92D40224900DED4AE /* Frameworks */,
-				003BACEA2D40224900DED4AE /* Resources */,
+				003BAD1E2D402A8700DED4AE /* Sources */,
+				003BAD1F2D402A8700DED4AE /* Frameworks */,
+				003BAD202D402A8700DED4AE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				003BACEE2D40224900DED4AE /* PBXTargetDependency */,
+				003BAD242D402A8700DED4AE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				003BACEF2D40224900DED4AE /* LandmarksUITests */,
+				003BAD252D402A8700DED4AE /* fantasy_basketball_ios_app1UITests */,
 			);
-			name = LandmarksUITests;
+			name = fantasy_basketball_ios_app1UITests;
 			packageProductDependencies = (
 			);
-			productName = LandmarksUITests;
-			productReference = 003BACEC2D40224900DED4AE /* LandmarksUITests.xctest */;
+			productName = fantasy_basketball_ios_app1UITests;
+			productReference = 003BAD222D402A8700DED4AE /* fantasy_basketball_ios_app1UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		003BACCA2D40224600DED4AE /* Project object */ = {
+		003BAD002D402A8500DED4AE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					003BACD12D40224700DED4AE = {
+					003BAD072D402A8500DED4AE = {
 						CreatedOnToolsVersion = 16.2;
 					};
-					003BACE12D40224900DED4AE = {
+					003BAD172D402A8700DED4AE = {
 						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 003BACD12D40224700DED4AE;
+						TestTargetID = 003BAD072D402A8500DED4AE;
 					};
-					003BACEB2D40224900DED4AE = {
+					003BAD212D402A8700DED4AE = {
 						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 003BACD12D40224700DED4AE;
+						TestTargetID = 003BAD072D402A8500DED4AE;
 					};
 				};
 			};
-			buildConfigurationList = 003BACCD2D40224600DED4AE /* Build configuration list for PBXProject "Landmarks" */;
+			buildConfigurationList = 003BAD032D402A8500DED4AE /* Build configuration list for PBXProject "fantasy_basketball_ios_app1" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 003BACC92D40224600DED4AE;
+			mainGroup = 003BACFF2D402A8500DED4AE;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 003BACD32D40224700DED4AE /* Products */;
+			productRefGroup = 003BAD092D402A8500DED4AE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				003BACD12D40224700DED4AE /* Landmarks */,
-				003BACE12D40224900DED4AE /* LandmarksTests */,
-				003BACEB2D40224900DED4AE /* LandmarksUITests */,
+				003BAD072D402A8500DED4AE /* fantasy_basketball_ios_app1 */,
+				003BAD172D402A8700DED4AE /* fantasy_basketball_ios_app1Tests */,
+				003BAD212D402A8700DED4AE /* fantasy_basketball_ios_app1UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		003BACD02D40224700DED4AE /* Resources */ = {
+		003BAD062D402A8500DED4AE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		003BACE02D40224900DED4AE /* Resources */ = {
+		003BAD162D402A8700DED4AE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		003BACEA2D40224900DED4AE /* Resources */ = {
+		003BAD202D402A8700DED4AE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,21 +232,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		003BACCE2D40224700DED4AE /* Sources */ = {
+		003BAD042D402A8500DED4AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		003BACDE2D40224900DED4AE /* Sources */ = {
+		003BAD142D402A8700DED4AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		003BACE82D40224900DED4AE /* Sources */ = {
+		003BAD1E2D402A8700DED4AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,20 +256,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		003BACE42D40224900DED4AE /* PBXTargetDependency */ = {
+		003BAD1A2D402A8700DED4AE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 003BACD12D40224700DED4AE /* Landmarks */;
-			targetProxy = 003BACE32D40224900DED4AE /* PBXContainerItemProxy */;
+			target = 003BAD072D402A8500DED4AE /* fantasy_basketball_ios_app1 */;
+			targetProxy = 003BAD192D402A8700DED4AE /* PBXContainerItemProxy */;
 		};
-		003BACEE2D40224900DED4AE /* PBXTargetDependency */ = {
+		003BAD242D402A8700DED4AE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 003BACD12D40224700DED4AE /* Landmarks */;
-			targetProxy = 003BACED2D40224900DED4AE /* PBXContainerItemProxy */;
+			target = 003BAD072D402A8500DED4AE /* fantasy_basketball_ios_app1 */;
+			targetProxy = 003BAD232D402A8700DED4AE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		003BACF42D40224900DED4AE /* Debug */ = {
+		003BAD2A2D402A8700DED4AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -353,7 +332,7 @@
 			};
 			name = Debug;
 		};
-		003BACF52D40224900DED4AE /* Release */ = {
+		003BAD2B2D402A8700DED4AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -409,14 +388,14 @@
 			};
 			name = Release;
 		};
-		003BACF72D40224900DED4AE /* Debug */ = {
+		003BAD2D2D402A8700DED4AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Landmarks/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"fantasy_basketball_ios_app1/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -429,7 +408,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mab.Landmarks;
+				PRODUCT_BUNDLE_IDENTIFIER = "mab.fantasy-basketball-ios-app1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -437,14 +416,14 @@
 			};
 			name = Debug;
 		};
-		003BACF82D40224900DED4AE /* Release */ = {
+		003BAD2E2D402A8700DED4AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Landmarks/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"fantasy_basketball_ios_app1/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -457,7 +436,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mab.Landmarks;
+				PRODUCT_BUNDLE_IDENTIFIER = "mab.fantasy-basketball-ios-app1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -465,7 +444,7 @@
 			};
 			name = Release;
 		};
-		003BACFA2D40224900DED4AE /* Debug */ = {
+		003BAD302D402A8700DED4AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -474,16 +453,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mab.LandmarksTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "mab.fantasy-basketball-ios-app1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Landmarks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Landmarks";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fantasy_basketball_ios_app1.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/fantasy_basketball_ios_app1";
 			};
 			name = Debug;
 		};
-		003BACFB2D40224900DED4AE /* Release */ = {
+		003BAD312D402A8700DED4AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -492,87 +471,87 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mab.LandmarksTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "mab.fantasy-basketball-ios-app1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Landmarks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Landmarks";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fantasy_basketball_ios_app1.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/fantasy_basketball_ios_app1";
 			};
 			name = Release;
 		};
-		003BACFD2D40224900DED4AE /* Debug */ = {
+		003BAD332D402A8700DED4AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mab.LandmarksUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "mab.fantasy-basketball-ios-app1UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Landmarks;
+				TEST_TARGET_NAME = fantasy_basketball_ios_app1;
 			};
 			name = Debug;
 		};
-		003BACFE2D40224900DED4AE /* Release */ = {
+		003BAD342D402A8700DED4AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mab.LandmarksUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "mab.fantasy-basketball-ios-app1UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Landmarks;
+				TEST_TARGET_NAME = fantasy_basketball_ios_app1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		003BACCD2D40224600DED4AE /* Build configuration list for PBXProject "Landmarks" */ = {
+		003BAD032D402A8500DED4AE /* Build configuration list for PBXProject "fantasy_basketball_ios_app1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				003BACF42D40224900DED4AE /* Debug */,
-				003BACF52D40224900DED4AE /* Release */,
+				003BAD2A2D402A8700DED4AE /* Debug */,
+				003BAD2B2D402A8700DED4AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		003BACF62D40224900DED4AE /* Build configuration list for PBXNativeTarget "Landmarks" */ = {
+		003BAD2C2D402A8700DED4AE /* Build configuration list for PBXNativeTarget "fantasy_basketball_ios_app1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				003BACF72D40224900DED4AE /* Debug */,
-				003BACF82D40224900DED4AE /* Release */,
+				003BAD2D2D402A8700DED4AE /* Debug */,
+				003BAD2E2D402A8700DED4AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		003BACF92D40224900DED4AE /* Build configuration list for PBXNativeTarget "LandmarksTests" */ = {
+		003BAD2F2D402A8700DED4AE /* Build configuration list for PBXNativeTarget "fantasy_basketball_ios_app1Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				003BACFA2D40224900DED4AE /* Debug */,
-				003BACFB2D40224900DED4AE /* Release */,
+				003BAD302D402A8700DED4AE /* Debug */,
+				003BAD312D402A8700DED4AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		003BACFC2D40224900DED4AE /* Build configuration list for PBXNativeTarget "LandmarksUITests" */ = {
+		003BAD322D402A8700DED4AE /* Build configuration list for PBXNativeTarget "fantasy_basketball_ios_app1UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				003BACFD2D40224900DED4AE /* Debug */,
-				003BACFE2D40224900DED4AE /* Release */,
+				003BAD332D402A8700DED4AE /* Debug */,
+				003BAD342D402A8700DED4AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 003BACCA2D40224600DED4AE /* Project object */;
+	rootObject = 003BAD002D402A8500DED4AE /* Project object */;
 }

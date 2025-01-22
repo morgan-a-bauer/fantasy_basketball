@@ -1,0 +1,28 @@
+[
+    
+    {
+        "id": "Paris's Crazy Team",
+        "year": "2023",
+        "record": "17-3-0",
+        "imageName": "parisscrazyteam2023"
+    },
+    {
+        "id": "Jokers",
+        "year": "2022",
+        "record": "18-2-0",
+        "imageName": "jokers2022"
+    },
+    {
+        "id": "The Rat Terriers",
+        "year": "2021",
+        "record": "9-11-0",
+        "imageName": "ratterriers2021"
+    },
+    {
+        "id": "Vaccinators",
+        "year": "2020",
+        "record": "11-5-0",
+        "imageName": "vaccinators2020"
+    }
+
+]
